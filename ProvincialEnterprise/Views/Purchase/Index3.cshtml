@@ -1,0 +1,718 @@
+﻿@{
+    //ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<div ng-app="purApp">
+    <div ng-controller="purCtrl">
+        <p class="divHead"></p>
+        <div class="form-horizontal">
+            <div align="center" style="color:royalblue"><h4><b>Purchase</b></h4></div>         
+                @*<b><i>{{Action}} Purchase</i></b>*@
+                <div class="form-group">
+                    <input type="hidden" ng-model="purchaseId" />
+                </div>
+
+                <div class="container">
+                    <div class="form-horizontal form-custom">
+                        <!-- BEGIN form-group line-1 -->
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Company</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" ng-model="companyId" ng-options="c.CompanyId as c.Name for c in companies" ng-change="getAllBranchesByCompany()">
+                                    <option value="">-- Select Company --</option>
+                                </select>                             
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Branch</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="branchId" ng-model="branchId" ng-options="b.BranchId as b.Name for b in branches" ng-change="getMarketingPeoplesByBranch(); getAllSuppliers(); getAccount(); getItems(); getBanks(); getUnits()">
+                                    <option value="">-- Select Branch --</option>
+                                </select>                           
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Account</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="accountId" ng-model="accountId" ng-options="a.AccountId as a.Name for a in accounts">
+                                    <option value="">-- Select Account --</option>
+                                </select>                              
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Supplier Id </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" id="supplierId" ng-model="supplierId" ng-pattern="supplierId" required ng-trim="true" ng-change="getAllSuppliers()" />
+                                @* <span class="error">* Unit price is required.</span>*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Purchase From</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="supplierId" ng-model="supplierId" ng-options="s.SupplierId as s.Name for s in suppliers">
+                                    <option value="">-- Select Supplier --</option>
+                                </select>                              
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Invoice No</label>
+                            <div class="col-sm-3">
+                                <input class="form-control" type="text" ng-model="invoiceNo" id="invoiceNo" />                                                             
+                            </div>
+
+                            <label class="col-sm-2 control-label">Date </label>
+                            <div class="col-sm-3">
+                                <input class="form-control" type="text" id="purchaseDate" ng-model="purchaseDate" />                              
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Item</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="itemId" ng-model="itemId" ng-options="i.ItemId as i.ItemName for i in items" ng-change="getModels()">
+                                    <option value="">-- Select Item --</option>
+                                </select>                            
+                            </div>
+                        </div>
+                    
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Model</label>
+                            <div class="col-sm-3">
+                                <select class="form-control" id="modelId" ng-model="modelId" ng-options="m.ModelId as m.ModelName for m in models">
+                                    <option value="">-- Select Model --</option>
+                                </select>                             
+                            </div>
+                            <label class="col-sm-2 control-label">Model Id</label>
+                            <div class="col-sm-3">
+                                <input class="form-control" type="text" id="modelId" ng-model="modelId" ng-pattern="modelId" required ng-trim="true" ng-change="getModels()" />                            
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Unit</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="unitId" ng-model="unitId" ng-options="u.UnitId as u.UnitName for u in units">
+                                    <option value="">-- Select Units --</option>
+                                </select>                             
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class=" col-sm-2 control-label">Quantity</label>
+                            <div class="col-sm-3">
+                                <input class="form-control" type="text" ng-model="qty" id="qty" />                           
+                            </div>
+                            <label class="col-sm-2 control-label">Price </label>
+                            <div class="col-sm-3">
+                                <input class="form-control" type="text" ng-model="unitPrice" id="unitPrice" />                             
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @*<label class="col-sm-2 control-label" >Serial</label>
+                        <div class="col-sm-3">
+                            <input class="form-control" type="text" ng-model="serial" id="serial" />
+                        </div>*@
+                            <div class="col-sm-8 lefttd">
+                                <input type="submit" class="btn btn-primary" value="Add" id="add" title="add" ng-disabled="!myForm.$valid" />
+                            </div>
+
+                            <!-- /col-sm-offset-4.col-sm-8 -->
+                        </div>
+                        <!-- /.form-group -->
+                    </div>
+                </div> <!-- /.container -->
+                @*<div class="form-group">
+            <label class="col-sm-4 control-label"></label>
+            <div class="col-sm-6">
+                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span>&nbsp;Save</button>
+                <input type="button" ng-click="addUpdatePurchase()" value="Add" id="add" />
+                <input type="button" class="btn btn-danger" value="Clear" ng-click="Cancel()" />
+            </div>            </div>*@        
+</div>
+
+
+        <div class="table-responsive">
+            <div id="orderItems" class="tablecontainer">
+                <h4>Purchase Details</h4>
+            </div>
+        </div>
+        <div id="parent">
+            <div id="narrow">
+                <table width="80%">
+                    <tr>
+                        <td class="lefttd"><b>Account</b></td>
+                        <td class="righttd">
+                            <select class="form-control input-sm" id="paymentModeId" ng-model="paymentModeId" ng-options="s.PaymentModeId as s.PaymentType for s in paymentModes">
+                                <option value="">-- Select Payment Mode --</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="lefttd"><b>Bank Name</b></td>
+                        <td class="righttd">
+                            <select class="form-control input-sm" id="bankId" ng-model="bankId" ng-options="b.BankId as b.BankName for b in banks">
+                                <option value="">-- Select Bank --</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="lefttd"><b>Customer Bank</b></td>
+                        <td class="righttd">
+                            <select class="form-control input-sm" id="customerBankId" ng-model="customerBankId" ng-options="b.BankId as b.Name for b in customerBanks">
+                                <option value="">-- Select Bank --</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="lefttd"><label id="chkNo">Cheque No</label></td>
+                        <td class="righttd"><input class="form-control input-sm" type="text" id="checkNo" /></td>
+                    </tr>
+                    <tr>
+                        <td class="lefttd"><label id="chkDate">Cheque Date</label></td>
+                        <td class="righttd"><input class="form-control input-sm" id="checkDate" /></td>
+                    </tr>
+                    <tr>
+                        <td class="lefttd"><b>Matured Date</b></td>
+                        <td class="righttd"><input class="form-control input-sm" id="maturedDate" /></td>
+                    </tr>
+                    <tr>
+                        <td class="lefttd"><b>Amount</b></td>
+                        <td class="righttd"><input class="form-control input-sm" id="amount" value="0.00" /></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="wide">
+                <table width="80%">
+                    <tr>
+                        <td class="lefttd"><b>Total</b></td>
+                        <td class="righttd">
+                            <input class="form-control input-sm" type="text" id="totalAmount" value="0.00" readonly />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="lefttd"><b>Discount</b></td>
+                        <td class="righttd">
+                            <input class="form-control input-sm" type="text" id="discountAmount" value="0.00" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="lefttd"><b>Grand Total</b></td>
+                        <td class="righttd">
+                            <input class="form-control input-sm" id="grandtotal" value="0.00" readonly />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="lefttd"><b>Due</b></td>
+                        <td class="righttd">
+                            <input class="form-control input-sm" id="dueTotal" value="0.00" readonly />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="righttd">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <button type="submit" id="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span>Save</button>
+                                        <input type="button" class="btn btn-danger" value="Cancel" />
+                                        <input type="button" class="btn btn-danger" value="Clear" />
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+</div>
+
+<style>
+    #parent {
+        display: flex;
+    }
+
+    #narrow {
+        width: 50%;
+        /*background: lightblue;*/
+        /* Just so it's visible */
+    }
+
+    #wide {
+        flex: 1;
+        /* Grow to rest of container */
+        /*background: lightgreen;*/
+        /* Just so it's visible */
+    }
+
+    .lefttd {
+        padding-right: 30px;
+        text-align: right;
+    }
+
+    .righttd {
+        padding-top: 2px;
+    }
+    /*Adding some css for looks good*/
+    span.error {
+        display: block;
+        visibility: hidden;
+        color: red;
+        font-size: 90%;
+    }
+
+    .ui-widget {
+        font-size: 12px !important;
+    }
+
+    .form-group.required .control-label:after {
+        color: #d00;
+        content: "*";
+        position: absolute;
+        margin-left: 8px;
+        top: 7px;
+    }
+
+    /*.form-group .help-block {
+        display: none;
+    }
+
+    .form-group.has-error .help-block {
+        display: block;
+    }*/
+</style>
+
+<link rel="stylesheet" type="text/css" media="screen" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+<link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+<script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+<script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+@*<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>*@
+
+
+
+@*<script type="text/javascript">
+        $(function () {
+            $("#supplierId").change(function () {
+                var selectedText = $(this).find("option:selected").text();
+                var selectedValue = $(this).val();
+                $("#supplierId").val(selectedValue.substring(7));
+                //alert("Selected Text: " + selectedText + " Value: " + selectedValue);
+            });
+        });
+
+        $(function () {
+            $("#modelId").change(function () {
+                var selectedText = $(this).find("option:selected").text();
+                var selectedValue = $(this).val();
+                //alert(selectedValue.substring(7));
+                //$('#supplierCode').val(Number($('#supplierCode').val()) + selectedValue);
+                $("#modelId").val(selectedValue.substring(7));
+                //alert("Selected Text: " + selectedText + " Value: " + selectedValue);
+            });
+        });
+
+    </script>*@
+
+
+
+
+<script>
+    //Date Picker
+    $(function () {
+        $('#purchaseDate').datetimepicker({ format: 'YYYY-MM-DD' });
+    });
+    $(function () {
+        $('#checkDate').datetimepicker({ format: 'YYYY-MM-DD' });
+    });
+    $(function () {
+        $('#maturedDate').datetimepicker({ format: 'YYYY-MM-DD' });
+    });
+    $(document).ready(function () {
+        var orderItems = [];
+        var len = 0;
+        debugger;
+
+        //$('.input-validation-error').parents('.form-group').addClass('has-error');
+        //$('.field-validation-error').addClass('text-danger');
+
+        //Add button click function
+        $('#add').click(function () {
+            //Check validation of order item
+            var item = $('#itemId option:selected').text();
+            var model = $('#modelId option:selected').text();
+            var unit = $('#unitId option:selected').text();
+            if (orderItems.length > 0) {
+
+                var isDuplicate = false;
+
+                for (var i = 0 ; i < orderItems.length; i++) {
+                    if (orderItems[i].ItemName == item && orderItems[i].ModelName == model) {
+                        isDuplicate = true;
+                        break;
+                    }
+                }
+
+                if (isDuplicate) {
+                    alert("Do not allow to add duplicate item and model");
+                }
+                else {
+                    AddElements();
+                }
+            }
+            else {
+                AddElements();
+            }
+            // EmptyFields();
+        });
+        //Add item to list if valid
+        function AddElements() {
+            var isValidItem = true;
+            var x = 0;
+
+            if (isValidItem) {
+                var model = ($('#modelId').val());
+                model = model.substring(7);
+                var item = $('#itemId').val();
+                item = item.substring(7);
+                var unit = $('#unitId').val();
+                unit = unit.substring(7);
+                //alert(parseFloat($('#unitPrice').val().trim()));
+                orderItems.push({
+                    ModelName: $('#modelId option:selected').text(),
+                    ModelId: model,
+                    ItemName: $('#itemId option:selected').text(),
+                    ItemId: item,
+                    UnitName: $('#unitId option:selected').text(),
+                    UnitId: unit,
+                    //SerialNo: $('#serial').val().trim(),
+                    Qty: parseInt($('#qty').val().trim(), 32),
+                    UnitPice: parseFloat($('#unitPrice').val().trim()),
+                    TotalAmount: parseInt($('#qty').val().trim(), 32) * parseFloat($('#unitPrice').val().trim())
+                });
+                //Clear fields
+                $('#itemName').val('').focus();
+                $('#quantity,#rate').val('');
+
+            }
+            // debugger;
+            //populate order items
+            GeneratedItemsTable();
+        }
+        //Save button click function
+        // debugger;
+        $('#submit').click(function () {
+            //debugger;
+            //validation of order
+            var isAllValid = true;
+            if (orderItems.length === 0) {
+                $('#orderItems').html('<span style="color:red;">Please add order items</span>');
+                isAllValid = false;
+            }
+
+            if ($('#invoiceNo').val().trim() === '') {
+                $('#invoiceNo').siblings('span.error').css('visibility', 'visible');
+                isAllValid = false;
+            }
+            else {
+                $('#invoiceNo').siblings('span.error').css('visibility', 'hidden');
+            }
+
+            if ($('#purchaseDate').val().trim() === '') {
+                $('#purchaseDate').siblings('span.error').css('visibility', 'visible');
+                isAllValid = false;
+            }
+            else {
+                $('#purchaseDate').siblings('span.error').css('visibility', 'hidden');
+            }
+            var pDate = $('#purchaseDate').val();
+            //Save if valid
+            if (isAllValid) {
+                //debugger;
+                var $AccountId = $('#accountId').val().substring(7).trim(),
+                    $BranchId = $('#branchId').val().substring(7),
+                    $InvoiceNo = $('#invoiceNo').val().trim(),
+                    $PurchaseDate = pDate,
+                    $SupplierId = $('#supplierId').val().substring(7),
+                    $ItemId = $('#itemId').val().substring(7),
+                    $UnitId = $('#unitId').val().substring(7),
+                    $TotalAmount = totalAmount; // $('totalAmount').val(),
+                $DisountAmount = $('#discountAmount').val(),
+                $GrantTotal = $('#grandtotal').val(),
+                $DueAmount = $('#dueTotal').val(),
+                $BankId = $('#bankId').val().substring(7),
+                $CheckNo = $('#checkNo').val(),
+                $CheckDate = $('#checkDate').val(),
+                $CheckMDate = $('#maturedDate').val(),
+                $PayAmount = $('#amount').val(),
+                $CustomerBankId = $('#customerBankId').val(),
+                $PaymentModeId = $('#paymentModeId').val().substring(7).trim();
+                //alert(totalAmount);
+                var data = {
+                    AccountId: $AccountId, //$('#accountId').val().substring(7).trim(),
+                    InvoiceNo: $InvoiceNo,
+                    PurchaseDate: $PurchaseDate,
+                    SupplierId: $SupplierId,
+                    ItemId: $ItemId,
+                    UnitId: $UnitId,
+                    TotalAmount: $TotalAmount,
+                    DisountAmount: $DisountAmount,
+                    GrantTotal: $GrantTotal,
+                    DueAmount: $DueAmount,
+                    BankId: $BankId,
+                    CheckNo: $CheckNo,
+                    CheckDate: $CheckDate,
+                    CheckMDate: $PurchaseDate,
+                    PayAmount: $PayAmount,
+                    BranchId: $BranchId,
+                    PaymentModeId: $PaymentModeId,
+                    CustomerBankId: $CustomerBankId,
+                    //Sorry forgot to add Description Field
+                    //Description: $('#description').val().trim(),
+                    PurchaseDetails: orderItems
+                };
+                $(this).val('Please wait...');
+                $.ajax({
+                    url: '/Purchase/SaveOrder',
+                    type: "POST",
+                    data: JSON.stringify(data),
+                    dataType: "JSON",
+                    contentType: "application/json",
+                    success: function (d) {
+                        if (d.duplicate === true) {
+                            alert("Duplicate invoice no is not allowed. Please try again...");
+                            $('#invoiceNo').val('').focus();
+                        }
+                        else {
+                            //check is successfully save to database
+                            if (d.status === true) {
+                                //will send status from server side
+                                alert('Successfully done.');
+                                //clear form
+                                orderItems = [];
+                                $('#invoiceNo').val('');
+                                $('#purchaseDate').val('');
+                                $('#qty').val('');
+                                $('#unitPrice').val('');
+                                $('#orderItems').empty();
+                                $('#totalAmount').val(0.00);
+                                $('#dueTotal').val(0.00);
+                                $('#grandtotal').val(0.00);
+                                $('#amount').val(0.00);
+                                $('#discountAmount').val(0.00);
+                            }
+                            else {
+                                alert('Failed');
+                            }
+                            $('#submit').val('Save');
+                        }
+                    },
+                    error: function () {
+                        alert('Error. Please try again.');
+                        $('#submit').val('Save');
+                    }
+                });
+            }
+        });
+        function EmptyFields() {
+            $('#itemId').val('');
+            $('#modelId').val('');
+            $('#unitId').val('');
+            $('#qty').val('');
+            $('#unitPrice').val('');
+            $('#serial').val('');
+        }
+        var removeTotal = 0;
+        var tbtotal = 0;
+        var totalAmount = 0;
+        var discountAmount = 0;
+        var dueTotal = 0;
+        //function for show added items in table
+        function GeneratedItemsTable() {
+            var isvalid = true;
+            debugger;
+            if (orderItems.length > 0) {
+                var $table = $("<table class='table table-bordered'/>");
+                $table.append('<thead><tr><th>Sl</th><th>Item</th><th>Model</th><th>Unit</th><th>Quantity</th><th>Rate</th><th>Total</th><th></th></tr></thead>');
+                var $tbody = $('<tbody/>');
+
+                $.each(orderItems, function (i, val) {
+                    i = i + 1;
+                    // debugger;
+                    var $row = $('<tr/>');
+                    $row.append($('<td/>').html(i));
+                    $row.append($('<td/>').html(val.ItemName));
+                    $row.append($('<td/>').html(val.ModelName));
+                    $row.append($('<td/>').html(val.UnitName));
+                    //$row.append($('<td/>').html(val.SerialNo));
+                    $row.append($('<td/>').html(val.Qty));
+                    $row.append($('<td/>').html(val.UnitPice));
+                    $row.append($('<td/>').html(val.TotalAmount));
+
+                    tbtotal = val.TotalAmount;
+
+                    var $remove = $('<a href="#">Remove</a>');
+                    $remove.click(function (e) {
+                        e.preventDefault();
+                        removeTotal = val.TotalAmount;
+                        orderItems.splice(i - 1, 1);
+                        GeneratedItemsTable();
+                    });
+
+                    $row.append($('<td/>').html($remove));
+                    $tbody.append($row);
+                });
+
+                console.log("current", orderItems);
+                $table.append($tbody);
+                $('#orderItems').html($table);
+
+            }
+            else {
+                $('#orderItems').html('');
+            }
+
+            if (removeTotal > 0) {
+                totalAmount = totalAmount - removeTotal;
+                removeTotal = 0;
+            }
+            else {
+                totalAmount = totalAmount + tbtotal;
+                tbtotal = 0;
+            }
+
+            //alert(totalAmount);
+            $('#totalAmount').val(totalAmount);
+            $('#dueTotal').val(totalAmount);
+            $('#grandtotal').val(0.00);
+            $('#amount').val(0.00);
+            $('#discountAmount').val(0.00);
+
+            if (orderItem.length === orderItem.length) {
+                isvalid = false;
+            }
+        }
+    });
+    //Enable Disable Property
+    var $paymentMode = $('#paymentModeId'),
+        $bank = $('#bankId'),
+        $checkNo = $('#checkNo'),
+        $checkDate = $('#checkDate'),
+        $maturedDate = $('#maturedDate'),
+        $amount = $('#amount'),
+        $discountAmount = $('#discountAmount'),
+        $dueTotal = $('#dueTotal'),
+        $grandtotal = $('#grandtotal'),
+        $customerBankId = $('#customerBankId');
+    //Ledger = 1, Cash = 2, Check = 3, Online Payment = 4, Bikash = 5, Duch Bangla Mobile = 6, Others = 7
+    $paymentMode.change(function () {
+        if ($paymentMode.val().substring(7) == '1') {
+            $bank.attr('disabled', 'disabled').val('');
+            $checkNo.attr('disabled', 'disabled').val('');
+            $checkDate.attr('disabled', 'disabled').val('');
+            $maturedDate.attr('disabled', 'disabled').val('');
+            $amount.attr('disabled', 'disabled').val('');
+            $customerBankId.attr('disabled', 'disabled').val('');
+            $amount.val(0.00);
+            $discountAmount.val(0.00);
+            $grandtotal.val(0.00);
+        }
+        else if ($paymentMode.val().substring(7) == '2') {
+            $bank.attr('disabled', 'disabled').val('');
+            $checkNo.attr('disabled', 'disabled').val('');
+            $checkDate.attr('disabled', 'disabled').val('');
+            $maturedDate.attr('disabled', 'disabled').val('');
+            $amount.removeAttr('disabled', 'disabled').val('');
+            $customerBankId.attr('disabled', 'disabled').val('');
+            $amount.val(0.00);
+            $discountAmount.val(0.00);
+            $grandtotal.val(0.00);
+        }
+        else if ($paymentMode.val().substring(7) == '3') {
+            $bank.removeAttr('disabled', 'disabled').val();
+            $checkNo.removeAttr('disabled', 'disabled').val('');
+            $checkDate.removeAttr('disabled', 'disabled').val('');
+            $maturedDate.removeAttr('disabled', 'disabled').val('');
+            $amount.removeAttr('disabled', 'disabled').val('');
+            $customerBankId.attr('disabled', 'disabled').val('');
+            $('#chkNo').text('Cheque No');
+            $('#chkDate').text('Cheque Date');
+            $amount.val(0.00);
+            $discountAmount.val(0.00);
+            $grandtotal.val(0.00);
+        }
+        else if ($paymentMode.val().substring(7) == '4') {
+            $bank.attr('disabled', 'disabled').val('');
+            $checkNo.removeAttr('disabled', 'disabled').val('');
+            $checkDate.removeAttr('disabled', 'disabled').val('');
+            $maturedDate.attr('disabled', 'disabled').val('');
+            $amount.removeAttr('disabled', 'disabled').val('');
+            $customerBankId.removeAttr('disabled', 'disabled').val('');
+            $('#chkNo').text('Received No');
+            $('#chkDate').text('Received Date');
+            $amount.val(0.00);
+            $discountAmount.val(0.00);
+            $grandtotal.val(0.00);
+            //add receive no & receive date
+        }
+        else if ($paymentMode.val().substring(7) == '5') {
+            $bank.attr('disabled', 'disabled').val(-1);
+            $checkNo.attr('disabled', 'disabled').val('');
+            $checkDate.removeAttr('disabled', 'disabled').val('');
+            $maturedDate.attr('disabled', 'disabled').val('');
+            $amount.removeAttr('disabled', 'disabled').val('');
+            $customerBankId.attr('disabled', 'disabled').val('');
+            $('#chkNo').text('Bikash No');
+            $('#chkDate').text('Payment Date');
+            $amount.val(0.00);
+            $discountAmount.val(0.00);
+            $grandtotal.val(0.00);
+            //add bikash no
+        }
+        else if ($paymentMode.val().substring(7) == '6') {
+            $bank.attr('disabled', 'disabled').val('');
+            $checkNo.attr('disabled', 'disabled').val('');
+            $checkDate.attr('disabled', 'disabled').val('');
+            $maturedDate.attr('disabled', 'disabled').val('');
+            $amount.attr('disabled', 'disabled').val('');
+            $customerBankId.attr('disabled', 'disabled').val('');
+            $amount.val(0.00);
+            $discountAmount.val(0.00);
+            $grandtotal.val(0.00);
+            //like bikash
+        }
+        //else {
+        //    $bank.attr('disabled', 'disabled').val(-1);
+        //    $checkNo.attr('disabled', 'disabled').val('');
+        //    $checkDate.attr('disabled', 'disabled').val('');
+        //    $maturedDate.attr('disabled', 'disabled').val('');
+        //}
+    }).trigger('change');
+    $("#amount").on('input', function () {
+        var x = parseFloat($('#amount').val());
+        var y = parseFloat($('#discountAmount').val());
+        var pAmount = x + y;
+        $('#grandtotal').val(pAmount);
+        var dueAmount = $('#totalAmount').val() - $('#grandtotal').val();
+        $('#dueTotal').val(dueAmount);
+    });
+    $("#discountAmount").on('input', function () {
+        var x = parseFloat($('#amount').val());
+        var y = parseFloat($('#discountAmount').val());
+        var pAmount = x + y;
+        $('#grandtotal').val(pAmount);
+        var dueAmount = $('#totalAmount').val() - $('#grandtotal').val();
+        $('#dueTotal').val(dueAmount);
+    });
+</script>

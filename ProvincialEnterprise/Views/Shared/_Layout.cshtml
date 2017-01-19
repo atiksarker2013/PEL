@@ -1,0 +1,221 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title> .::.PEL.::.</title>
+
+    <!-- core CSS -->
+    <link href="~/Content/WebContent/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/WebContent/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Content/WebContent/css/animate.min.css" rel="stylesheet">
+    <link href="~/Content/WebContent/css/prettyPhoto.css" rel="stylesheet">
+    <link href="~/Content/WebContent/css/main.css" rel="stylesheet">
+    <link href="~/Content/WebContent/css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="~/Content/WebContent/images/ico/favicon.ico">
+    
+</head><!--/head-->
+<body class="homepage">
+    <header id="header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-xs-4">
+                        <div class="top-number"><p><i class="fa fa-phone-square"></i>  +880 1716 410696 / +880 1819 425006</p></div>
+                    </div>
+                    <div class="col-sm-6 col-xs-8">
+                        <div class="social">
+                            <ul class="social-share">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                <li><a href="#"><i class="fa fa-skype"></i></a></li>
+                            </ul>
+                            <div class="search">
+                                <form role="form">
+                                    <ul>
+                                        <li data-toggle="modal" data-target="#myLoginModal"><a href="#"><b>Log In</b></a></li>
+                                    </ul>
+                                    @* @Html.ActionLink("Home", "Index", "Home")*@
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--/.container-->
+        </div><!--/.top-bar-->
+        <nav class="navbar navbar-inverse" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#"><img height="60" width="430" src="~/Images/Logo/LogoName.jpg" alt="logo"></a>
+
+                </div>
+
+                <div class="collapse navbar-collapse navbar-right">
+                    <ul class="nav navbar-nav">
+                        <li @ViewBag.Home>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li @ViewBag.About>@Html.ActionLink("About Us", "About", "Home")</li>
+                        <li @ViewBag.Product>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <i class="fa fa-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li @ViewBag.Camera>@Html.ActionLink("Camera", "Camera", "Product")</li>
+                                <li @ViewBag.Device>@Html.ActionLink("Access Control Device", "AccessControlDevice", "Product")</li>
+                                <li @ViewBag.Laptop>@Html.ActionLink("Laptop", "Laptop", "Product")</li>
+                                <li @ViewBag.Accessories>@Html.ActionLink("Software", "Software", "Product")</li>
+                            </ul>
+                        </li>
+                        @*<li @ViewBag.Product>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <i class="fa fa-angle-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li @ViewBag.All>@Html.ActionLink("Government", "Government ", "Portfolio")</li>
+                                    <li @ViewBag.Tin>@Html.ActionLink("Private/Non-Government", "Private", "Portfolio")</li>
+                                    <li @ViewBag.Cement>@Html.ActionLink("Webpage", "Webpage", "Portfolio")</li>
+                                </ul>
+                            </li>*@
+
+                        <li @ViewBag.Contact>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                </div>
+            </div><!--/.container-->
+        </nav><!--/nav-->
+
+    </header><!--/header-->
+    <!--Login Modal Srart-->
+
+    <div class="modal fade" id="myLoginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: darkblue !important">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title" style="color: white">Log in</h2>
+                </div>
+                
+                <div class="modal-body">
+                    
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="email">User:</label>
+                            <div class="col-sm-8">
+                                <input type="email" class="form-control" id="username" name="username" placeholder="Enter User Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="pwd">Password:</label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" id="password" name="txt_password" placeholder="Enter Password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label id="msgLabel"></label>
+                        </div>
+                    </div>
+
+                    @*<div class="form-group">
+                        <label for="email">User Name</label>
+                        <input type="email" class="form-control" id="username" name="username" placeholder="User Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="txt_password" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <label id="msgLabel"></label>
+                    </div>*@
+                </div>
+                <div class="modal-footer" style="background-color: darkblue !important">
+                    <button type="submit" class="btn btn-primary" id="btnLogin">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Login Modal End-->
+
+    <div class="">
+
+        @RenderBody()
+
+    </div>
+    <section id="bottom"></section><!--/#bottom-->
+    <footer id="footer" class="midnight-blue">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    &copy;<a target="_blank" href="http://pelbd.net/" title="">Provincial Enterprise Ltd.</a> All Rights Reserved.
+                </div>
+                <div class="col-sm-6">
+                    <ul class="pull-right">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About Us", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer><!--/#footer-->
+    
+    
+    
+    <script src="~/Content/WebContent/js/jquery.js"></script>
+    <script src="~/Content/WebContent/js/bootstrap.min.js"></script>
+    <script src="~/Content/WebContent/js/jquery.prettyPhoto.js"></script>
+    <script src="~/Content/WebContent/js/jquery.isotope.min.js"></script>
+    <script src="~/Content/WebContent/js/main.js"></script>
+    <script src="~/Content/WebContent/js/wow.min.js"></script>
+    <script src="~/Custom/Login.js"></script>
+    
+    <script>
+    $(document).ready(function () {
+        $('#btnLogin').click(function () {
+
+           // alert(1);
+          //  alert(1);
+
+                var data = {
+                    "UserName": $("#username").val(),
+                    "password": $("#password").val(),
+                };
+
+                $.ajax({
+                    url: "/User/ValidUser",
+                    type: "POST",
+                    data: JSON.stringify(data),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (response) {
+                        if (response.Success) {
+                           
+                            window.location.href = "@Url.Action("Index", "Company")";
+                            $('#myLoginModal').modal('hide');
+                        }
+                        else {
+                            // DoSomethingElse()
+                            $('#msgLabel').val = "Login Fail!!!";
+                        } 
+
+                        //if (response != null && response.success) {
+                        //    alert(response.responseText);
+                        //}                          
+                    },
+                    error: function (response) {
+                        alert("error!");  // 
+                    }
+                    
+                    //error: function () {
+                    //    alert(2);
+                    //    $('#msgLabel').val = "Login Fail!!!";
+
+                    //}
+                });
+        });
+    });
+    </script>
+
+</body>
+</html>

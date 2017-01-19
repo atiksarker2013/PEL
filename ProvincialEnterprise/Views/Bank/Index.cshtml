@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+
+<div ng-app="bankApp">
+    <div ng-controller="bankCtrl">
+        <p class="divHead"></p>
+        <div class="form-horizontal">
+            <div align="center" style="color:royalblue"><h4><b>Bank</b></h4></div>
+            @*<b><i>{{Action}} Bank</i></b>*@
+            <div class="form-group">
+                <input type="hidden" ng-model="bankId" />
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Company</label>
+                <div class="col-sm-6">
+                    <select class="form-control" ng-model="companyId" ng-options="c.CompanyId as c.Name for c in companies" ng-change="getAllBranchesByCompany(); getBanks()">
+                        <option value="">-- Select Company --</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Branch</label>
+                <div class="col-sm-6">
+                    <select class="form-control" ng-model="branchId" ng-options="c.BranchId as c.Name for c in branches" ng-change="getBanks()">
+                        <option value="">-- Select Branch --</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Bank Name</label>
+                <div class="col-sm-6">
+                    <input class="form-control" type="text" ng-model="name" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Branch Name</label>
+                <div class="col-sm-6">
+                    <input class="form-control" ng-model="branch" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label">A/C No</label>
+                <div class="col-sm-6">
+                    <input class="form-control" type="text" ng-model="accountNo" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Opening</label>
+                <div class="col-sm-6">
+                    <input class="form-control" type="text" ng-model="opening" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label"></label>
+                <div class="col-sm-6">
+                    <button type="submit" class="btn btn-primary" ng-click="addUpdateBank()"><span class="glyphicon glyphicon-save"></span>&nbsp;Save</button>
+                    <input type="button" class="btn btn-danger" value="Clear" ng-click="Cancel()" />
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Branch Name</th>
+                        <th>Account No</th>
+                        <th>Opening</th>
+                        <th>Company Branch</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tr ng-repeat="bank in banks">
+
+                    <td>
+                        {{bank.BankName}}
+                    </td>
+                    <td>
+                        {{bank.Branch}}
+                    </td>
+                    <td>
+                        {{bank.AccountNo}}
+                    </td>
+                    <td>
+                        {{bank.Opening}}
+                    </td>
+                    <td>
+                        {{bank.BranchName}}
+                    </td>
+                    <td>
+                        <a href="" ng-click="editBank(bank)" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;
+                        <a href="" ng-click="deleteBank(bank)" title=" delete"><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+            </table>
+            @*<dir-pagination-controls max-size="5"
+                                     direction-links="true"
+                                     boundary-links="true">
+            </dir-pagination-controls>*@
+        </div>
+    </div>
+</div>
+

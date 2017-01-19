@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>.::PEL::.</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    <!-- Bootstrap -->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="~/Content/css/style.css" rel="stylesheet">
+
+    <link href="~/Content/addons/bootstrap/jquery.smartmenus.bootstrap.css" rel="stylesheet" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+   @* <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>*@
+
+
+
+    @Scripts.Render("~/bundles/angularJS")
+    @Scripts.Render("~/bundles/CustomJS")
+
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav normal">
+                    <!--<li class="active"><a href="#">Home</a></li>
+                    <li><a href="#about">About us</a></li>
+                    <li><a href="#contact">Contact</a></li>-->
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Entry <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Company Info", "Index", "Company")</li>
+                            <li>@Html.ActionLink("Branch Info", "Index", "Branch")</li>
+                            <li>@Html.ActionLink("Section", "Index", "Section")</li>
+                            <li>@Html.ActionLink("Designation", "Index", "Designation")</li>
+                            <li>@Html.ActionLink("Marketing Info", "Index", "Market")</li>
+                            <li>@Html.ActionLink("Unit", "Index", "Unit")</li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Main Head", "Index", "MainHead")</li>
+                            <li>@Html.ActionLink("Ledger", "Index", "Ledger")</li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Company Bank Info", "Index", "Bank")</li>
+                            <li>@Html.ActionLink("Customer Bank Info", "Index", "CustomerBank")</li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Customer Info", "Index", "Customer")</li>
+                            <li>@Html.ActionLink("Supplier Info", "Index", "Supplier")</li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("CC Loan Limit Setup", "Index", "CCLimit")</li>
+                            <li>@Html.ActionLink("Trading A/C Setup", "#", "#")</li>
+                            <li>@Html.ActionLink("Employee Information", "#", "#")</li>
+                            <li>@Html.ActionLink("Weekend Holiday", "#", "#")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Stock <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Item", "Index", "Item")</li>
+                            <li>@Html.ActionLink("Item Description", "Index", "Model")</li>
+                            <li>@Html.ActionLink("Opening Stock", "Index", "OpeningStock")</li>
+                            <li>@Html.ActionLink("Purchase", "Index", "Purchase")</li>
+                            <li>@Html.ActionLink("Purchase return", "Index", "PurchaseDetail")</li>
+                            <li>@Html.ActionLink("Sales", "#", "#")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Transaction <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Receive", "#", "#")</li>
+                            <li>@Html.ActionLink("Payment", "#", "#")</li>
+                            <li>@Html.ActionLink("Daily Transaction", "#", "#")</li>
+                            <li>@Html.ActionLink("Journal Entry", "#", "#")</li>
+                            <li>@Html.ActionLink("Edit Journal Entry", "#", "#")</li>
+                            <li>@Html.ActionLink("Cash Withdraw", "#", "#")</li>
+                            <li>@Html.ActionLink("Cash Deposit", "#", "#")</li>
+                            <li>@Html.ActionLink("Cheque", "#", "#")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Create User", "#", "#")</li>
+                            <li>@Html.ActionLink("Change Password", "#", "#")</li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Web <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>@Html.ActionLink("Contents", "Index", "WebContents")</li>
+                                    <li>@Html.ActionLink("Product", "Index", "WebProduct")</li>
+                                    <li class="divider"></li>
+                                    <li>@Html.ActionLink("Image Upload", "WebImageUpload", "WebContents")</li>
+                                </ul>
+                            </li>
+                            <li>@Html.ActionLink("Stock", "#", "#")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Report <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Customer Report", "Index", "Report")</li>
+                            <li>@Html.ActionLink("Sales Report", "#", "#")</li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Purchase Report", "#", "#")</li>
+                            <li>@Html.ActionLink("Stock", "#", "#")</li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+    <div class="container">
+        @RenderBody()
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="~/Content/addons/js/jquery.smartmenus.js"></script>
+    <!-- SmartMenus jQuery Bootstrap Addon -->
+    <script src="~/Content/addons/bootstrap/jquery.smartmenus.bootstrap.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="~/Content/WebContent/js/bootstrap.min.js"></script>
+    
+
+    <script>
+        $(document).ready(function () {
+            // Show step
+            $('.ad-search-btn').on('click', function () {
+                $('.ad-search').show();
+                $('.n-search').hide();
+
+            });
+        });
+    </script>
+</body>
+</html>

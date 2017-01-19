@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<div ng-app="unitApp">
+    <div ng-controller="unitCtrl">
+        <p class="divHead"></p>
+        <div class="form-horizontal">
+            <div align="center" style="color:royalblue"><h4><b>Unit</b></h4></div>
+                      
+            <div class="form-group">
+                <div class="form-group">
+                    <input type="hidden" ng-model="companyId" />
+                </div>
+                <label class="col-sm-4 control-label">Company</label>
+                <div class="col-sm-6">
+                    <select class="form-control" ng-model="companyId" ng-options="c.CompanyId as c.Name for c in companies" ng-change=" getAllBranchesByCompany(); getAllCompanies(); getUnits()">
+                        <option value="">-- Select Company --</option>
+                    </select>
+                </div>
+            </div>           
+            <div class="form-group">
+                <div class="form-group">
+                    <input type="hidden" ng-model="branchId" />
+                </div>
+                <label class="col-sm-4 control-label">Branch</label>
+                <div class="col-sm-6">
+                    <select class="form-control" ng-model="branchId" ng-options="b.BranchId as b.Name for b in branches" ng-change="getUnits()">
+                        <option value="">-- Select Branch --</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="hidden" ng-model="unitId" />
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Unit Name</label>
+                <div class="col-sm-6">
+                    <input class="form-control" type="text" ng-model="unitName" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label"></label>
+                <div class="col-sm-6">
+                    <button type="submit" class="btn btn-primary" ng-click="addUpdateUnit()"><span class="glyphicon glyphicon-save"></span>&nbsp;Save</button>
+                    <input type="button" class="btn btn-danger" value="Clear" ng-click="Cancel()" />
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Company Name</th>
+                        <th>Branch Name</th>
+                        <th>Unit Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="unit in units">
+                    <td>
+                        {{unit.CompanyName}}
+                    </td>
+                    <td>
+                        {{unit.BranchName}}
+                    </td>
+                    <td>
+                        {{unit.UnitName}}
+                    </td>
+                    <td>
+                        <a href="" ng-click="editUnit(unit)" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;
+                        <a href="" ng-click="deleteUnit(unit)" title=" delete"><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</div>
+

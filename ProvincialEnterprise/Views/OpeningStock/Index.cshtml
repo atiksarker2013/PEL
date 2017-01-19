@@ -1,0 +1,360 @@
+﻿@{
+    //ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+<div ng-app="osApp">
+    <div ng-controller="osCtrl">
+        <p class="divHead"></p>
+        <div class="form-horizontal">
+            <div align="center" style="color:royalblue"><h4><b>Opening Stock</b></h4></div>
+            @*<b><i>{{Action}} Purchase</i></b>*@
+            <div class="form-group">
+                @*<input type="hidden" ng-model="purchaseId" />*@
+            </div>
+
+            <div class="container">
+                <div class="form-horizontal form-custom">
+                    <!-- BEGIN form-group line-1 -->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Company</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" ng-model="companyId" ng-options="c.CompanyId as c.Name for c in companies" ng-change="getAllBranchesByCompany();">
+                                <option value="">-- Select Company --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Branch</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" id="branchId" ng-model="branchId" ng-options="c.BranchId as c.Name for c in branches" ng-change="getMarketingPeoplesByBranch(); getAllSuppliers(); getAccount(); getItems(); getBanks()">
+                                <option value="">-- Select Branch --</option>
+                            </select>
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                        <label class="col-sm-2 control-label">Account</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" id="accountId" ng-model="accountId" ng-options="s.AccountId as s.Name for s in accounts">
+                                <option value="">-- Select Account --</option>
+                            </select>
+                        </div>
+                    </div>*@
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Purchase From</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" id="supplierId" ng-model="supplierId" ng-options="s.SupplierId as s.Name for s in suppliers">
+                                <option value="">-- Select Supplier --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Invoice No</label>
+                        <div class="col-sm-3">
+                            <input class="form-control" type="text" ng-model="invoiceNo" id="invoiceNo" />
+                            @*<span class="error">* Invoiceno is required.</span>*@
+                        </div>
+                        @*<label class="col-sm-2 control-label">Date </label>
+                        <div class="col-sm-3">
+                            <input class="form-control" type="text" id="purchaseDate" />
+                        </div>*@
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Item</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" id="itemId" ng-model="itemId" ng-options="c.ItemId as c.ItemName for c in items" ng-change="getModels()">
+                                <option value="">-- Select Item --</option>
+                            </select>
+                            @*<span class="error">* Item is required.</span>*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Model</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" id="modelId" ng-model="modelId" ng-options="m.ModelId as m.ModelName for m in models">
+                                <option value="">-- Select Model --</option>
+                            </select>
+                            @*<span class="error">* Model is required.</span>*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Quantity</label>
+                        <div class="col-sm-3">
+                            <input class="form-control" type="text" ng-model="qty" id="qty" />
+                            @*<span class="error">* Quantity is required.</span>*@
+                        </div>
+                        <label class="col-sm-2 control-label">Price </label>
+                        <div class="col-sm-3">
+                            <input class="form-control" type="text" ng-model="unitPrice" id="unitPrice" required="required" />
+                            @*  <span class="error">* Unit price is required.</span>*@
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Serial</label>
+                        <div class="col-sm-3">
+                            <input class="form-control" type="text" ng-model="serial" id="serial" />
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="submit" class="btn btn-default" value="Add" id="add" />
+                        </div>
+                        <!-- /col-sm-offset-4.col-sm-8 -->
+                    </div>
+                    <div class="table-responsive">
+                        <div id="openingItems" class="tablecontainer">
+                            <h4>Purchase Details</h4>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <button type="submit" id="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span>Save</button>
+                            <input type="button" class="btn btn-danger" value="Cancel" />
+                            <input type="button" class="btn btn-danger" value="Clear" />
+                        </div>
+                        <!-- /col-sm-offset-4.col-sm-8 -->
+                    </div>
+                    <!-- /.form-group -->
+                </div>
+            </div> <!-- /.container -->
+            @*<div class="form-group">
+                    <label class="col-sm-4 control-label"></label>
+                    <div class="col-sm-6">
+                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span>&nbsp;Save</button>
+                        <input type="button" ng-click="addUpdatePurchase()" value="Add" id="add" />
+                        <input type="button" class="btn btn-danger" value="Clear" ng-click="Cancel()" />
+                    </div>
+                </div>*@
+        </div>
+
+
+        
+
+    </div>
+    <br />
+    <br />
+</div>
+
+<style>
+    
+    /*Adding some css for looks good*/
+    span.error {
+        display: block;
+        visibility: hidden;
+        color: red;
+        font-size: 90%;
+    }
+
+    .ui-widget {
+        font-size: 12px !important;
+    }
+
+    .form-group.required .control-label:after {
+        color: #d00;
+        content: "*";
+        position: absolute;
+        margin-left: 8px;
+        top: 7px;
+    }
+</style>
+
+<link rel="stylesheet" type="text/css" media="screen" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+<link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+<script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+<script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
+
+@*<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>*@
+
+<script>
+    //Date Picker
+    $(function () {
+        $('#purchaseDate').datetimepicker({ format: 'YYYY-MM-DD' });
+    });
+
+   
+
+    $(document).ready(function () {
+        var openingItems = [];
+        var len = 0;
+        //Add button click function
+        $('#add').click(function () {
+            //Check validation of order item
+
+            var item = $('#itemId option:selected').text();
+            var model = $('#modelId option:selected').text();
+
+            if (openingItems.length > 0) {
+                $.map(openingItems, function (elementOfArray, indexInArray) {
+                    if (elementOfArray.ItemName == item && elementOfArray.ModelName == model) {
+                        alert("Do not allow to add duplicate item and model");
+                    }
+                    else {
+                        AddElements();
+                    }
+                });
+            }
+            else {
+                AddElements();
+            }
+        });
+
+        //Add item to list if valid
+        function AddElements() {
+            var isValidItem = true;
+            var x = 0;
+
+         
+            if (isValidItem) {
+                var model = ($('#modelId').val());
+                model = model.substring(7);
+                var item = $('#itemId').val();
+                item = item.substring(7);
+                //alert(parseFloat($('#unitPrice').val().trim()));
+                openingItems.push({
+                    ModelName: $('#modelId option:selected').text(),
+                    ModelId: model,
+                    ItemName: $('#itemId option:selected').text(),
+                    SerialNo: $('#serial').val().trim(),
+                    Qty: parseInt($('#qty').val().trim()),
+                    UnitPice: parseFloat($('#unitPrice').val().trim())
+                    //TotalAmount: parseInt($('#qty').val().trim()) * parseFloat($('#unitPrice').val().trim())
+                });
+
+                //Clear fields
+                $('#itemName').val('').focus();
+                $('#quantity,#rate').val('');
+
+            }
+            //populate order items
+            GeneratedItemsTable();
+        };
+        //Save button click function
+        $('#submit').click(function () {
+
+            //validation of order
+            var isAllValid = true;
+        
+            var pDate = $('#purchaseDate').val();
+            //Save if valid
+            if (isAllValid) {
+                var $AccountId = $('#accountId').val().substring(7).trim(),
+                    $BranchId = $('#branchId').val().substring(7),
+                    $InvoiceNo = $('#invoiceNo').val().trim(),
+                    $PurchaseDate = pDate,
+                    $SupplierId = $('#supplierId').val().substring(7),
+                    $ItemId = $('#itemId').val().substring(7),
+                    $TotalAmount = totalAmount
+
+                //alert(totalAmount);
+                var data = {
+                    AccountId: $AccountId, //$('#accountId').val().substring(7).trim(),
+                    InvoiceNo: $InvoiceNo,
+                    PurchaseDate: $PurchaseDate,
+                    SupplierId: $SupplierId,
+                    ItemId: $ItemId,
+                    BranchId: $BranchId,
+                    PurchaseDetails: openingItems
+                }
+
+                $(this).val('Please wait...');
+
+                $.ajax({
+                    url: '/OpeningStock/SaveOpeningStock',
+                    type: "POST",
+                    data: JSON.stringify(data),
+                    dataType: "JSON",
+                    contentType: "application/json",
+                    success: function (d) {
+
+                        if (d.duplicate == true) {
+                            alert("Duplicate invoice no is not allowed. Please try again...");
+                            $('#invoiceNo').val('').focus();
+                        }
+                        else {
+                            //check is successfully save to database
+                            if (d.status == true) {
+                                //will send status from server side
+                                alert('Successfully done.');
+                                //clear form
+                                openingItems = [];
+                                $('#invoiceNo').val('');
+                                $('#purchaseDate').val('');
+                                $('#openingItems').empty();
+                               
+                            }
+                            else {
+                                alert('Failed');
+                            }
+                            $('#submit').val('Save');
+                        }
+                    },
+                    error: function () {
+                        alert('Error. Please try again.');
+                        $('#submit').val('Save');
+                    }
+                });
+            }
+        });
+        function EmptyFields() {
+
+        }
+
+        var totalAmount = 0;
+        //function for show added items in table
+        function GeneratedItemsTable() {
+
+            if (openingItems.length > 0) {
+
+                var $table = $("<table class='table table-bordered'/>");
+                $table.append('<thead><tr><th>Sl</th><th>Item</th><th>Model</th><th>Serial No</th><th>Quantity</th><th>Rate</th><th>Total</th><th></th></tr></thead>');
+                var $tbody = $('<tbody/>');
+                var x = 0;
+
+                $.each(openingItems, function (i, val) {
+                    x = x + 1;
+                    //alert(val.UnitPrice);
+                    var $row = $('<tr/>');
+                    $row.append($('<td/>').html(x));
+                    $row.append($('<td/>').html(val.ItemName));
+                    $row.append($('<td/>').html(val.ModelName));
+                    $row.append($('<td/>').html(val.SerialNo));
+                    $row.append($('<td/>').html(val.Qty));
+                    $row.append($('<td/>').html(val.UnitPice));
+                    $row.append($('<td/>').html(val.TotalAmount));
+                    //totalAmount = val.TotalAmount + totalAmount;
+
+                    var $remove = $('<a href="#">Remove</a>');
+                    $remove.click(function (e) {
+                        e.preventDefault();
+                        openingItems.splice(i, 1);
+                        GeneratedItemsTable();
+                    });
+
+                    $row.append($('<td/>').html($remove));
+                    $tbody.append($row);
+                });
+
+                console.log("current", openingItems);
+                $table.append($tbody);
+                $('#openingItems').html($table);
+            }
+            else {
+                $('#openingItems').html('');
+            }
+            //alert(totalAmount);
+            //$('#totalAmount').val(totalAmount);
+           
+        }
+    });
+
+    //Enable Disable Property
+
+</script>

@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<script src="~/Scripts/lib/dirPagination.js"></script>
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Custom/Section/sectionModule.js"></script>
+<script src="~/Custom/Section/sectionService.js"></script>
+<script src="~/Custom/Section/sectionController.js"></script>
+
+<div ng-app="secApp">
+    <div ng-controller="secCtrl">
+        <div class="form-horizontal">
+            <div align="center" style="color:royalblue"><h4><b>Section</b></h4></div>
+            @*<b><i>{{Action}} Section</i></b>*@
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Company</label>
+                <div class="col-sm-6">
+                    <select class="form-control" ng-model="companyId" ng-options="c.CompanyId as c.Name for c in companies" ng-change="getAllSections(); getAllBranchesByCompany()">
+                        <option value="">-- Select Company --</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="hidden" ng-model="sectionId" />
+                <label class="col-sm-4 control-label">Branch</label>
+                <div class="col-sm-6">
+                    <select class="form-control" ng-model="branchId" data-ng-disabled="!branches" ng-options="b.BranchId as b.Name for b in branches" ng-change="getAllSections()">
+                        <option value="">-- Select Branch --</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Section Name</label>
+                <div class="col-sm-6">
+                    <input class="form-control" type="text" ng-model="name" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label"></label>
+                <div class="col-sm-6">
+                    <button type="submit" class="btn btn-primary" ng-click="addUpdateSection()"><span class="glyphicon glyphicon-save"></span>&nbsp;Save</button>
+                    <input type="button" class="btn btn-danger" value="Clear" ng-click="Cancel()" />
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Branch</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="section in sections">
+                    <td>
+                        {{section.Name}}
+                    </td>
+                    <td>
+                        {{section.BranchName}}
+                    </td>
+                    <td>                      
+                        <a href="" ng-click="editSection(section)" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;
+                        <a href="" ng-click="deleteSection(section)" title=" delete"><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+            </table>
+            @*<dir-pagination-controls max-size="5"
+                                     direction-links="true"
+                                     boundary-links="true">
+            </dir-pagination-controls>*@
+        </div>
+    </div>
+</div>

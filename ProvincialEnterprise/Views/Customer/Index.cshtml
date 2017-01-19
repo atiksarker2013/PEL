@@ -1,0 +1,160 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+
+<div ng-app="customerApp">
+    <div ng-controller="customerCtrl">
+        <p class="divHead"></p>
+        <div class="form-horizontal">
+            <div align="center" style="color:royalblue"><h4><b>Customer</b></h4></div>
+            @* <b><i>{{Action}} Customer</i></b>*@
+            <div class="form-group">
+                <input type="hidden" ng-model="customerId" />
+            </div>
+            <div class="container">
+                <div class="form-horizontal form-custom">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Company</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" ng-model="companyId" ng-options="c.CompanyId as c.Name for c in companies" ng-change="getAllBranchesByCompany(); getCustomers()">
+                                <option value="">-- Select Company --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Branch</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" ng-model="branchId" ng-options="c.BranchId as c.Name for c in branches" ng-change="getMarketingPeoplesByBranch(); getCustomers()">
+                                <option value="">-- Select Branch --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Bank</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" ng-model="bankId" ng-options="b.BankId as b.Name for b in banks">
+                                <option value="">-- Select Bank --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Marketing</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" ng-model="marketId" ng-options="m.MarketId as m.MarketName for m in marketingPeoples">
+                                <option value="">-- Select Marketing --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-3">
+                            <input class="form-control" type="text" ng-model="name" />
+                        </div>
+                        <label class="col-sm-2 control-label">Address </label>
+                        <div class="col-sm-3">
+                            <input class="form-control" type="text" ng-model="address" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Owner Name</label>
+                        <div class="col-sm-3">
+                            <input class="form-control" type="text" ng-model="ownerName" />
+                        </div>
+                        <label class="col-sm-2 control-label">Telephone </label>
+                        <div class="col-sm-3">
+                            <input class="form-control" type="text" ng-model="telephone" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-3">
+                            <input class="form-control" type="text" ng-model="email" />
+                        </div>
+                        <label class="col-sm-2 control-label">NID </label>
+                        <div class="col-sm-3">
+                            <input class="form-control" type="text" ng-model="nationalId" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Trade License</label>
+                        <div class="col-sm-3">
+                            <input class="form-control" type="text" ng-model="tradeLicense" />
+                        </div>
+                        <label class="col-sm-2 control-label">Cheque No </label>
+                        <div class="col-sm-3">
+                            <input class="form-control" type="text" ng-model="checkNo" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Cheque Amount</label>
+                        <div class="col-sm-3">
+                            <input class="form-control" type="text" ng-model="checkAmount" />
+                        </div>
+                        <label class="col-sm-2 control-label">Code </label>
+                        <div class="col-sm-3">
+                            <input class="form-control" type="text" ng-model="companyCode" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label"></label>
+                        <div class="col-sm-6">
+                            <button type="submit" class="btn btn-primary" ng-click="addUpdateCustomer()"><span class="glyphicon glyphicon-save"></span>&nbsp;Save</button>
+                            <input type="button" class="btn btn-danger" value="Clear" ng-click="Cancel()" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                    
+                </div>
+
+                <div class="table-responsive">
+                    @*<div class="form-inline">
+                        <div class="form-group">
+                            <label>Search</label>
+                            <input type="text" ng-model="search" class="form-control" placeholder="Search" />
+                        </div>
+                    </div>*@
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Owner Name</th>
+                                <th>Contact</th>
+                                <th>Email</th>
+                                <th>Compay Code</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="customer in customers">
+                            <td>{{customer.CustomerName}}</td>
+                            <td>{{customer.Address}}</td>
+                            <td>{{customer.OwnerName}}</td>
+                            <td>{{customer.Telephone}}</td>
+                            <td>{{customer.EmailId}}</td>
+                            <td>{{customer.CompanyCode}}</td>
+
+                            <td>
+                                <a href="" ng-click="editCustomer(customer)" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;
+                                <a href="" ng-click="deleteCustomer(customer)" title=" delete"><span class="glyphicon glyphicon-trash"></span></a>
+                            </td>
+                        </tr>
+                    </table>
+                    @*<dir-pagination-controls max-size="5"
+                                             direction-links="true"
+                                             boundary-links="true">
+                    </dir-pagination-controls>*@
+                </div>
+            </div>
+        </div>
+
+

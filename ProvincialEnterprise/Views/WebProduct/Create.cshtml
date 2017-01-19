@@ -1,0 +1,190 @@
+﻿@model ProvincialEnterprise.Models.Product
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+@using (Html.BeginForm(Html.BeginForm("Create", "WebProduct", FormMethod.Post, new { enctype = "multipart/form-data" })))
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="each-part each-part-bfbtn-container">
+        <a href="@Url.Action("Index", "WebProduct")">
+            <span class="glyphicon glyphicon-circle-arrow-left"></span>&nbsp;Back
+        </a>
+    </div>
+    <div class="each-part each-part-input-container">
+
+        <div class="row contact-wrap">
+            <div class="status alert alert-success" style="display: none"></div>
+
+            <div class="col-sm-5 col-sm-offset-1">
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    @Html.DropDownList("ProductCategoryId", null, htmlAttributes: new { @class = "form-control" })
+                </div>
+                
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @*     @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })*@
+                </div>
+               
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-save"></span>&nbsp;Save</button>
+                    @*  <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-refresh"></span>&nbsp;Clear</button>*@
+                </div>
+            </div>
+
+
+            <div class="col-sm-5">
+                
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @*     @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })*@
+                </div>
+
+                
+                <div class="form-group">
+                    <label for="thumb">Image:</label>
+                    <br />
+                    <img id="image_upload_preview" src="http://placehold.it/150x150" alt="your image" width="162px" height="163px" />
+                    <br />
+                    <input type="file" name="file" id="file" />&nbsp;&nbsp;&nbsp;
+                </div>
+              
+                
+                
+
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/jscript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#image_upload_preview').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#file").change(function () {
+        readURL(this);
+    });
+
+
+    function readURL1(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#image_upload_preview1').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#file1").change(function () {
+        readURL1(this);
+    });
+    </script>
+}
+
+
+
+
+
+@*@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Product</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ImagePath, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ImagePath, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProductCategoryId, "ProductCategoryId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ProductCategoryId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ProductCategoryId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProductModelId, "ProductModelId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ProductModelId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ProductModelId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@

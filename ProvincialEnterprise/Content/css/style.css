@@ -1,0 +1,46 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+  min-height: 700px;
+  padding-top: 100px;
+}
+.navbar-brand{height:80px; padding:5px 15px 2px 15px;}
+.navbar-nav{ margin:20px 0px 5px 0px;}
+.navbar-default .navbar-nav > li > a {
+    color: #428bca;
+}
+.each-part{ width:100%; padding:5px 0px 5px 0px;}
+.each-part-input-container{border:1px solid #cccccc; background-color:#f9f9f9; padding:20px 3% 10px 3%;}
+.each-part-right{text-align:right;}
+
+.each-part-bfbtn-container{text-align:right;}
+.ad-search{display:none;}
+.table > thead > tr > th{ background-color:#428bca; color:#f9f9f9; font-size:12px;}
+.table > tbody > tr > td{padding:4px 8px 4px 8px; font-size:12px;}
+.group-list{width:90%;}
+.bold{font-weight:bold;}
+.fsize14{font-size:14px;}
+.blue{color:#428bca;}
+.group-bg{background-color:#e7e7e7;}
+.table > tbody > tr:hover{ background-color:#f9f9f9;}
+.frm2{display:none;}
+@media(max-width:767px){
+
+
+}
+@media (min-width: 768px) and (max-width: 991px){
+ .container {
+    width: 750px;
+  }
+
+}
+@media(min-width:992px) and (max-width: 1199px){
+ .container {
+    width: 970px;
+  }
+}
+@media(min-width:1200px){
+.container {
+    width: 1170px;
+  }
+}

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c819417aa1b94b868a12e517091cb3a1" Name="Diagram1">
+        <EntityTypeShape EntityType="PELModel.Account" Width="1.5" PointX="12" PointY="48.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.AccountType" Width="1.5" PointX="7.5" PointY="48" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.Area" Width="1.5" PointX="5.25" PointY="41.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.Bank" Width="1.5" PointX="9.75" PointY="34.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.Branch" Width="1.5" PointX="7.5" PointY="39.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.CCLimit" Width="1.5" PointX="12" PointY="39.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.ChequeInfo" Width="1.5" PointX="14.25" PointY="40.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.Company" Width="1.5" PointX="5.25" PointY="38.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.Customer" Width="1.5" PointX="15" PointY="47.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.CustomerBank" Width="1.5" PointX="12.75" PointY="36.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.Designation" Width="1.5" PointX="12" PointY="64" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.District" Width="1.5" PointX="0.75" PointY="42" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.Employee" Width="1.5" PointX="9.75" PointY="39.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.Grade" Width="1.5" PointX="9.75" PointY="58.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.Item" Width="1.5" PointX="9.75" PointY="51.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.ItemJournal" Width="1.5" PointX="9.75" PointY="54.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.JournalDetail" Width="1.5" PointX="17.25" PointY="49" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.MainHead" Width="1.5" PointX="9.75" PointY="46.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.Market" Width="1.5" PointX="9.75" PointY="60.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.Model" Width="1.5" PointX="12" PointY="43.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.OpeningStock" Width="1.5" PointX="17.25" PointY="44.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.PaymentMode" Width="1.5" PointX="12" PointY="56.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.ProductCategory" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.ProductDetail" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.PurchaseDetail" Width="1.5" PointX="16.5" PointY="57.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.PurchaseHead" Width="1.5" PointX="14.25" PointY="54.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.ReceivePayment" Width="1.5" PointX="19.5" PointY="47.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.Section" Width="1.5" PointX="9.75" PointY="64.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.StockOpening" Width="1.5" PointX="9.75" PointY="66.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.StockSerial" Width="1.5" PointX="19.5" PointY="43.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.Supplier" Width="1.5" PointX="9.75" PointY="69.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.sysdiagram" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.Thana" Width="1.5" PointX="3" PointY="41.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.Unit" Width="1.5" PointX="9.75" PointY="73.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.User" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.VoucherInfo" Width="1.5" PointX="9.75" PointY="76" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.WebContent" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PELModel.Weekend" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="PELModel.FK_Account_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_Account_MainHead" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_Account_Market" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_ChequeInfo_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_JournalDetails_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_JournalDetails_Account1" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_OpeningStock_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_PurchaseHead_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_StockSerial_Supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_MainHead_AccountType1" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_Area_Thana" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_Branch_Area" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_Customer_Area1" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_Employee_Area" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_Bank_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_CCLimit_Bank" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_ChequeInfo_Bank" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_PurchaseHead_Bank" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_Branch_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_CCLimit_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_ChequeInfo_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_Customer_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_Employee_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_Item_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_ItemJournal_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_JournalDetails_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_MainHead_Branch1" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_Market_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_Model_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_OpeningStock_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_PurchaseHead_Branch1" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_RceivePayment_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_Section_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_StockOpening_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_StockSerial_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_Supplier_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_Unit_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_VoucherInfo_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_ChequeInfo_CustomerBank" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_ChequeInfo_PurchaseHead" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_ChequeInfo_ReceivePayment" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_Customer_CustomerBank1" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_Customer_Market" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_PurchaseHead_CustomerBank" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_Designation_Grade" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_Designation_Section" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_Employee_Designation" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_Thana_District" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_Model_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_PurchaseDetail_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_JournalDetails_Market" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_JournalDetails_PaymentMode" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_OpeningStock_Model" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_PurchaseDetail_Model" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_StockSerial_Model" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_PurchaseHead_PaymentMode" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_RceivePayment_PaymentMode" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_ProductDetails_ProductCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_PurchaseDetail_PurchaseHead" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_PurchaseDetail_Unit" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_PurchaseHead_Supplier1" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_RceivePayment_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_StockSerial_PurchaseHead" ManuallyRouted="false" />
+        <AssociationConnector Association="PELModel.FK_JournalDetails_PurchaseHead" />
+        <AssociationConnector Association="PELModel.FK_PurchaseDetail_StockSerial" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
